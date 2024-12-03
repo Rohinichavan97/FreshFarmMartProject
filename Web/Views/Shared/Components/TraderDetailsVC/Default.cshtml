@@ -1,0 +1,56 @@
+﻿@model Core.TraderFarmer
+
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card shadow">
+                <div class="card-header text-center bg-danger text-white">
+                    <h2>@Model.TradeName</h2>
+                </div>
+                <div class="card-body">
+                   
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-circle"></i> Trader Name</h5>
+                        <p>@Model.TradeName</p>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-info-circle"></i> Address</h5>
+                        <p>@Model.Address</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-circle"></i> PinCode</h5>
+                        <p>@Model.PinCode</p>
+                    </div>
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-circle"></i> City Name</h5>
+                        <p>@Model.City.CityName</p>
+                    </div>
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-circle"></i> Contact Person Name</h5>
+                        <p>@Model.ContactPerson</p>
+                    </div>
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-calendar"></i> Registration Date</h5>
+                        <p>@Model.RegistrationDate.ToString("MMMM dd, yyyy hh:mm tt")</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5 class="text-muted"><i class="fa fa-map-circle"></i>Active Flag</h5>
+                        <p>@(Model.ActiveFlag ? "Yes" : "No")</p>>
+                    </div>
+                    <div class="text-center">
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left"></i> Back to Product List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

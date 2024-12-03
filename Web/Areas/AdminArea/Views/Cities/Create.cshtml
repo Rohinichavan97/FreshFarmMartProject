@@ -1,0 +1,73 @@
+﻿@model City
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">New City</h4>
+
+        <form class="forms-sample" method="post" asp-action="Create">
+            <div class="text-danger" asp-validation-summary="ModelOnly">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername1">City Name</label>
+                <input class="form-control" asp-for="CityName" id="exampleInputUsername1" placeholder="CityName" fdprocessedid="glgnm">
+                <span asp-validation-for="CityName"></span>
+            </div>
+            <div class="col-12">
+                <label for="exampleInputUsername1" class="form-label">Select Country Name</label>
+                <select class="form-select" id="country" asp-items="ViewBag.Countries">
+                    <option>Select Country</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername1">State Name</label>
+                <select class="form-select" asp-for="StateID">
+                    <option>Select State</option>
+                </select>
+                <span asp-validation-for="StateID"></span>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a class="btn btn-info" asp-action="Index"> Back </a>
+            </div>
+
+           
+           
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+
+        $("#country").change(function () {
+
+            $.ajax({
+                url: "/AdminArea/Cities/GetStates/?CountryID=" + $(this).val(),
+                type:"Get",
+                contentType:"application/json",
+                success: function (result) {
+                    // alert(JSON.stringify(result));
+                    $("#StateID").empty();
+                    $.each(result, function (ind, item) {
+                        // alert(ind);
+                        //alert(JSON.stringify(item));
+                        var opt = "<option value=" + item.stateID + ">" + item.stateName + "</option>";
+                        $("#StateID").append(opt);
+                    });
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+
+            });
+
+        });
+    });
+</script>
+
+
+
+
+
+
+

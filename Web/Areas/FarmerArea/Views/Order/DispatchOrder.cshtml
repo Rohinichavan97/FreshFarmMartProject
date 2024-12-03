@@ -1,0 +1,47 @@
+﻿@model OrderDispatch
+<h2> Dispatch For Order : @ViewBag.UserOrderID</h2>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Dispatch Order</h5>
+
+        <!-- Vertical Form -->
+        <form class="row g-3" method="post" asp-action="DispatchOrder">
+            <div class="text-danger" asp-validation-summary="ModelOnly">
+            </div>
+            <input type="hidden" asp-for="UserOrderID" value="@ViewBag.UserOrderID" />
+            <div class="col-12">
+                <label for="inputNanme4" class="form-label">Dispatch Agency Name</label>
+                <select class="form-select" asp-for="DispatchAgencyID" asp-items="@ViewBag.DispatchAgencies">
+                    <option>Select Dispatch Agency</option>
+                </select>
+                <span asp-validation-for="DispatchAgencyID"></span>
+            </div>
+
+            <div class="col-12">
+                <label for="inputNanme4" class="form-label">Dispatch Date:</label>
+                <input class="form-control" asp-for="DispatchDate" />
+                <span asp-validation-for="DispatchDate"></span>
+            </div>
+
+            <div class="col-12">
+                <label for="inputNanme4" class="form-label">Docket No</label>
+                <input class="form-control" asp-for="DocketNo" />
+                <span asp-validation-for="DocketNo"></span>
+            </div>
+
+            <div class="col-12">
+                <label for="inputNanme4" class="form-label">Expected Reach Date</label>
+                <input class="form-control" asp-for="ExpectedReachDate" />
+                <span asp-validation-for="ExpectedReachDate"></span>
+            </div>
+
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a class="btn btn-info" asp-action="Index"> Back </a>
+            </div>
+        </form><!-- Vertical Form -->
+
+    </div>
+</div>

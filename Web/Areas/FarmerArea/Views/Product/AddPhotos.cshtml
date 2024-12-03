@@ -1,0 +1,45 @@
+﻿@model ProductPhotoVM
+
+<div class="container">
+    <h2>Add Photos</h2>
+
+    <!-- Upload New Photo -->
+    <form asp-action="AddPhotos" asp-route-id="@Model.ProductID" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="newPhoto">Upload New Photo:</label>
+            <input type="file" name="newPhoto" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Upload Photo</button>
+      
+
+       
+    </form>
+
+    <hr />
+
+    <!-- Existing Photos -->
+    <h4>Existing Photos</h4>
+    <div class="row">
+        @foreach (var photo in Model.ExistingPhotos)
+        {
+            <div class="col-md-3">
+                <div class="card mb-3">
+                    <img src="@photo.PhotoPath" class="card-img-top" alt="Product Photo" style="object-fit:cover" />
+                    <div class="card-body">
+                        <form asp-action="DeletePhoto" asp-route-photoId="@photo.ProductPhotoID" method="post">
+                        <div class="text-center">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                         @*    <a class="btn btn-info" asp-action="Index" asp-controller="Product"> Back </a> *@
+                        </form>
+                    </div>
+                </div>
+            </div>
+         
+        }
+    </div>
+   <div class="text-center">
+        <a class="btn btn-info" asp-action="Index" asp-controller="Product"><i class="fa fa-arrow-left"></i> Back to List </a>
+   </div>
+</div>
+

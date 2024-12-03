@@ -1,0 +1,30 @@
+﻿@model Unit
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Create form</h4>
+
+        <form class="forms-sample" method="post" asp-action="Create">
+            <div class="text-danger" asp-validation-summary="ModelOnly">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername1">Unit Name</label>
+                <input class="form-control" asp-for="UnitName" id="exampleInputUnitName" placeholder="UnitName" fdprocessedid="glgnm">
+                <span asp-validation-for="UnitName"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputUsername1">QtyPerUnit</label>
+                <input class="form-control" asp-for="QtyPerUnit" id="exampleInputQtyPerUnit" placeholder="QtyPerUnit" fdprocessedid="glgnm">
+                <span asp-validation-for="QtyPerUnit"></span>
+            </div>
+
+           
+
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a class="btn btn-info" asp-action="Index"> Back </a>
+            </div>
+        </form>
+    </div>
+</div>

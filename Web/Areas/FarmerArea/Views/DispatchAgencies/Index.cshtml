@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DispatchAgency>
+<div class="card">
+    <div class="card-header">
+        <h2> Dispatch Agency List</h2>
+    </div>
+    <div class="card-body">
+        <a asp-action="Create" class="btn btn-info"> Create New</a>
+        <hr />
+        <div class="table-responsive pt-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col"><b>#</b></th>
+                        <th scope="col"><b>Agency Name</b></th>
+                        <th scope="col"> <b>Address</b> </th>
+                        <th scope="col"> <b>Email ID </b></th>
+                        <td scope="col"> <b>Contact NO</b> </td>
+                        <td scope="col"> <b>Contact Person Name</b></td>
+                        <th scope="col"><b>Actions</b></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int srno = 1;
+                    }
+                    @foreach (var temp in Model)
+                    {
+                        <tr>
+                            <th scope="row">@srno</th>
+                            <td>@temp.AgencyName</td>
+                            <td>@temp.Address</td>
+                            <td>@temp.EmailID</td>
+                            <td>@temp.MobileNo</td>
+                            <td>@temp.ContactPerson</td>
+                            <td>
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@temp.DispatchAgencyID"> Edit </a>
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@temp.DispatchAgencyID"> Delete </a>
+                            </td>
+                        </tr>
+                        srno++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

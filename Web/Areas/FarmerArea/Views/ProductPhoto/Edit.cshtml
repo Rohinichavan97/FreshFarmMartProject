@@ -1,0 +1,49 @@
+﻿@model ProductPhoto
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Edit New form</h4>
+
+        <form class="forms-sample" method="post" asp-action="Edit" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ProudctPhotoID" />
+            <div class="text-danger" asp-validation-summary="ModelOnly">
+            </div>
+
+
+            <div class="form-group">
+                <label for="exampleInputUsername1">Product Name</label>
+                <select class="form-control" asp-for="ProductID" asp-items="ViewBag.Products" id="Product" placeholder="Product" fdprocessedid="glgnm">
+                    <option>Select Product Name</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputUsername1">PhotoPath</label>
+                <input type="file" class="form-control" asp-for="PhotoFile" id="exampleInputPhoto" placeholder="Photo" fdprocessedid="glgnm">
+                <span asp-validation-for="PhotoFile"></span>
+            </div>
+           @*  <div class="form-group">
+                <label for="exampleInputUsername1">PhotoPath</label>
+                <input type="file" class="form-control" asp-for="PhotoFile" id="exampleInputPhoto" placeholder="Photo" fdprocessedid="glgnm">
+                <span asp-validation-for="PhotoFile"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername1">PhotoPath</label>
+                <input type="file" class="form-control" asp-for="PhotoFile" id="exampleInputPhoto" placeholder="Photo" fdprocessedid="glgnm">
+                <span asp-validation-for="PhotoFile"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername1">PhotoPath</label>
+                <input type="file" class="form-control" asp-for="PhotoFile" id="exampleInputPhoto" placeholder="Photo" fdprocessedid="glgnm">
+                <span asp-validation-for="PhotoFile"></span>
+            </div> *@
+
+
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a class="btn btn-info" asp-action="Index"> Back </a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+﻿@model Infra.ViewModels.ProductAndProductDiscountVM
+
+
+
+<div id="discountSection" style="display:none;">
+    <div class="form-group">
+        <label asp-for="DiscountName" class="control-label"></label>
+        <input asp-for="DiscountName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DiscountAmount" class="control-label"></label>
+        <input asp-for="DiscountAmount" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IsPercentile" class="control-label"></label>
+        <input asp-for="IsPercentile" type="checkbox" />
+    </div>
+</div>
+
+
+

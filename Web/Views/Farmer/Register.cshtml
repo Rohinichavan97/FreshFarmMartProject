@@ -1,0 +1,188 @@
+﻿@model FarmerVM
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Registration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="shortcut icon" href="~/assets/images/favicon.png" />
+</head>
+
+<body>
+    <section class="vh-100" style="background-color: #f7f7f7;">
+        <div class="container py-5 h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-lg-8">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-header text-center bg-primary text-white">
+                            <h3>Farmer Registration</h3>
+                        </div>
+                        <div class="card-body p-4">
+                            <form class="row g-3" method="post" asp-action="Register" asp-controller="Farmer">
+                                <div class="text-danger mb-3" asp-validation-summary="ModelOnly"></div>
+                                <!-- Trade Name -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Trade Name</label>
+                                    <input type="text" class="form-control" asp-for="TradeName" placeholder="First Name" />
+                                    <span class="text-danger" asp-validation-for="TradeName"></span>
+                                </div>
+                                <!-- Mobile No -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Mobile No</label>
+                                    <input type="text" class="form-control" asp-for="MobileNo" placeholder="Mobile No" />
+                                    <span class="text-danger" asp-validation-for="MobileNo"></span>
+                                </div>
+                                <!-- Address -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Address</label>
+                                    <textarea class="form-control" asp-for="Address" placeholder="Address"></textarea>
+                                    <span class="text-danger" asp-validation-for="Address"></span>
+                                </div>
+                                <!-- Pin Code -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Postcode/ZIP</label>
+                                    <input type="text" class="form-control" asp-for="PinCode" placeholder="Postcode/ZIP" />
+                                    <span class="text-danger" asp-validation-for="PinCode"></span>
+                                </div>
+                                <!-- Password -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" asp-for="Password" placeholder="Password" />
+                                    <span class="text-danger" asp-validation-for="Password"></span>
+                                </div>
+                                <!-- Email -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" asp-for="Email" placeholder="Email" />
+                                    <span class="text-danger" asp-validation-for="Email"></span>
+                                </div>
+                                <!-- Contact Person -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Contact Person</label>
+                                    <input type="text" class="form-control" asp-for="ContactPerson" placeholder="Contact Person" />
+                                    <span class="text-danger" asp-validation-for="ContactPerson"></span>
+                                </div>
+                                <!-- Registration Date -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Registration Date</label>
+                                    <input type="datetime-local" class="form-control" asp-for="RegistrationDate" />
+                                    <span class="text-danger" asp-validation-for="RegistrationDate"></span>
+                                </div>
+                                    <div class="col-md-6">
+                                    <label class="form-label">country</label>
+                                    <select id="country" asp-for="CountryID" asp-items="ViewBag.Countries" class="form-select">
+                                        <option value="">Select Country</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="CountryID"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">state</label>
+                                    <select id="state" asp-for="StateID" asp-items="ViewBag.States" class="form-select">
+                                        <option value="">Select state</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="StateID"></span>
+                                </div>
+                                <!-- City Dropdown -->
+                                <div class="col-md-6">
+                                    <label class="form-label">City</label>
+                                    <select id="city" asp-for="CityID" asp-items="ViewBag.Cities" class="form-select">
+                                        <option value="">Select City</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="CityID"></span>
+                                </div>
+                                <!-- Submit Button -->
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary w-50">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+     
+
+    <!-- container-scroller -->
+    <!-- base:js -->
+    <script src="~/assets/vendors/base/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- inject:js -->
+    <script src="~/assets/js/off-canvas.js"></script>
+    <script src="~/assets/js/hoverable-collapse.js"></script>
+    <script src="~/assets/js/template.js"></script>
+    <!-- endinject -->
+</body>
+
+</html>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#country").change(function () {
+
+            $.ajax({
+                url: "/Farmer/GetStates?countryid=" + $(this).val(),
+                type: "Get",
+                contentType: "application/json",
+                success: function (result) {
+                    $("#state").empty();
+                    $("#state").append("<option>Select State</option>");
+                    $.each(result, function (indx, item) {
+                        //  alert(JSON.stringify(item));
+                        var opt = "<option value='" + item.stateID + "'>" + item.stateName + "</option>";
+                        //   alert(JSON.stringify(opt));
+                        $("#state").append(opt);
+                    });
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+
+
+
+
+
+        });
+
+
+        $("#state").change(function () {
+
+            $.ajax({
+                url: "/Farmer/GetCities?stateid=" + $(this).val(),
+                type: "Get",
+                contentType: "application/json",
+                success: function (result) {
+
+                    $("#CityID").empty();
+                    $("#CityID").append("<option>Select City</option>");
+
+                    $.each(result, function (indx, item) {
+                        // alert(JSON.stringify(item));
+                        var opt = "<option value='" + item.cityID + "'>" + item.cityName + "</option>";
+                        //   alert(JSON.stringify(opt));
+                        $("#CityID").append(opt);
+                    });
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+
+
+        });
+
+    });
+</script>

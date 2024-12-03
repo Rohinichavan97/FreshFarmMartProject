@@ -1,0 +1,126 @@
+﻿@model UserProfileVM
+<div class="Card">
+    <div class="card-header">
+        <h2> Edit Profile </h2>
+    </div>
+    <div class="card-body">
+        <h3 class="text-danger">@ViewBag.Message</h3>
+        <hr />
+        <form asp-action="Edit" method="post" asp-controller="UserHome">
+
+            <div class="form-group">
+                <label for="exampleInputUsername1">Fullname</label>
+                <input type="text" asp-for="FullName" class="form-control" >
+             
+                <input type="hidden" asp-for="FirstName" />
+                <input type="hidden" asp-for="LastName" />
+            </div>  
+
+            <div class="form-group">
+                <label for="exampleInputAddress">Address</label>
+               
+                <textarea class="form-control" asp-for="Address">
+                    </textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputOccupation">Occupation</label>
+                <input  asp-for="Occupation" class="form-control" id="Occupation">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPinCode">PinCode No</label>
+                <input asp-for="PinCode" class="form-control" id="PinCode">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputCountry">Country</label>
+                <select id="country" asp-items=ViewBag.countries class="form-control w-100 rounded-3 p-3">
+                    <option>Select Country</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputState">State</label>
+                <select id="state" asp-items=ViewBag.states class="form-control w-100 rounded-3 p-3">
+                    <option>Select State</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputCity">City</label>
+                <select  id="CityID" name="CityID" asp-items=ViewBag.cities class="form-control w-100 rounded-3 p-3">
+                    <option>Select City</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input asp-for="EmailId" class="form-control" id="exampleInputEmail1" placeholder="Email" fdprocessedid="fz2g2">
+            </div>
+          
+           
+
+           
+            <button type="submit" class="btn btn-primary mr-2" fdprocessedid="dowamm">Submit</button>
+            <button class="btn btn-light" fdprocessedid="j6ci88">Cancel</button>
+        </form>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#country").change(function () {
+
+            $.ajax({
+                url: "/ManageUser/GetStates?countryid=" + $(this).val(),
+                type: "Get",
+                contentType: "application/json",
+                success: function (result) {
+                    $("#state").empty();
+                    $("#state").append("<option>Select State</option>");
+                    $.each(result, function (indx, item) {
+                        //  alert(JSON.stringify(item));
+                        var opt = "<option value='" + item.stateID + "'>" + item.stateName + "</option>";
+                        //   alert(JSON.stringify(opt));
+                        $("#state").append(opt);
+                    });
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+
+
+
+
+
+        });
+
+
+        $("#state").change(function () {
+
+            $.ajax({
+                url: "/ManageUser/GetCities?stateid=" + $(this).val(),
+                type: "Get",
+                contentType: "application/json",
+                success: function (result) {
+
+                    $("#CityID").empty();
+                    $("#CityID").append("<option>Select City</option>");
+
+                    $.each(result, function (indx, item) {
+                        // alert(JSON.stringify(item));
+                        var opt = "<option value='" + item.cityID + "'>" + item.cityName + "</option>";
+                        //   alert(JSON.stringify(opt));
+                        $("#CityID").append(opt);
+                    });
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+
+
+        });
+
+    });
+</script>
+

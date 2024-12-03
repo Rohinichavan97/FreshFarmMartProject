@@ -1,0 +1,33 @@
+﻿@model IEnumerable<UserOrder>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2> New Order List</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th> Order ID </th>
+                        <td> Order Date </td>
+                        <td> User Name </td>
+                        <td> Is Paid</td>
+                        <td> Actions</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var temp in Model)
+                    {
+                        <tr>
+                            <td> @temp.UserOrderID</td>
+                            <td>@temp.OrderDate</td>
+                            <td>@temp.User.FullName</td>
+                            <td>@temp.IsPaid</td>
+                            <td>
+                                <a asp-action="ViewOrder" asp-controller="UserOrder" asp-route-id="@temp.UserOrderID" class="btn btn-danger"> View Order</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

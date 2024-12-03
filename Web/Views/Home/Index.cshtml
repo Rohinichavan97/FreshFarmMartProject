@@ -1,0 +1,161 @@
+﻿@model SearchProductVM
+
+<form asp-action="Index" method="post" class="mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-2">
+            <select id="MainCategoryID" asp-for="MainCategoryID" asp-items="ViewBag.MainCategoryID" class="form-select">
+                <option value="0">Select MainCategory</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select id="CategoryID" asp-for="CategoryID" asp-items="ViewBag.CategoryID" class="form-select">
+                <option value="0">Select Category</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select id="CountryID" asp-for="CountryID" asp-items="ViewBag.CountryID" class="form-select">
+                <option value="0">Select Country</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select id="StateID" asp-for="StateID" asp-items="ViewBag.StateID" class="form-select">
+                <option value="0">Select State</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select id="CityID" asp-for="CityID" asp-items="ViewBag.CityID" class="form-select">
+                <option value="0">Select City</option>
+            </select>
+        </div>
+        <div class="col-md-2 text-center">
+            <input type="submit" value="SEARCH" class="btn btn-success w-100" />
+        </div>
+    </div>
+</form>
+
+
+@if (Model.ProductDataVM != null && Model.ProductDataVM.Count() > 0)
+
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+        @foreach (var temp in Model.ProductDataVM)
+
+        {
+            <div class="col">
+                <div class="card shadow h-100">
+                    <img src="@temp.MainPhotoPath" class="card-img-top" alt="Product Image" style="height: 200px; object-fit: contain;">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary text-center">@temp.ProductName</h5>
+                        <p class="card-text">
+                            <strong class="me-2 text-dark">Description:</strong> @temp.ProductDesc <br />
+                            <strong class="me-2 text-dark">Category:</strong> @temp.CategoryName <br />
+                            <strong class="me-2 text-dark">Unit:</strong> @temp.UnitName <br />
+                            <strong class="me-2 text-dark">Quantity:</strong> @temp.Qty <br />
+                            <strong class="me-2 text-dark">Price:</strong> ₹@temp.Price <br />
+                            <strong class="me-2 text-dark">Trader:</strong> @temp.TradeName
+                        </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-around">
+                        <a class="btn btn-danger btn-sm" asp-action="Details" asp-route-id="@temp.ProductID">View Details</a>
+                        <a class="btn btn-primary btn-sm" asp-action="AddToCart" asp-controller="Cart" asp-route-cartid="CartID" asp-route-productid="@temp.ProductID">Add to Cart</a>
+                        <a class="btn btn-secondary btn-sm" asp-action="AddToWishList" asp-controller="WishList" asp-route-pid="@temp.ProductID" asp-route-catid="@temp.CategoryID">
+                            WishList
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 0.5rem;
+    }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+</style>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        // When MainCategory changes
+        $('#MainCategoryID').change(function () {
+            var mainCategoryID = $(this).val();
+            if (mainCategoryID > 0) {
+                $.ajax({
+                    url: '/Home/GetCategories?MainCategoryID=' + mainCategoryID,
+                    type: 'GET',
+                    success: function (result) {
+                        //alert(JSON.stringify(result))
+                        $('#CategoryID').empty().append('<option value="0">Select Category</option>');
+                        $.each(result, function (index, category) {
+                            $('#CategoryID').append('<option value="' + category.categoryID + '">' + category.categoryName + '</option>');
+                        });
+                    }
+                });
+            }
+        });
+
+        // When Country changes
+        $('#CountryID').change(function () {
+            var countryID = $(this).val();
+            if (countryID > 0) {
+                $.ajax({
+                    url: '/Home/GetStates?CountryID=' + countryID,
+                    type: 'GET',
+                    success: function (result) {
+                        //alert(JSON.stringify(result))
+                        $('#StateID').empty().append('<option value="0">Select State</option>');
+                        $.each(result, function (index, state) {
+                            $('#StateID').append('<option value="' + state.stateID + '">' + state.stateName + '</option>');
+                        });
+                    }
+                });
+            }
+        });
+
+        // When State changes
+        $('#StateID').change(function () {
+            var stateID = $(this).val();
+            if (stateID > 0) {
+                $.ajax({
+                    url: '/Home/GetCities?StateID=' + stateID,
+                    type: 'GET',
+                    success: function (result) {
+                        $('#CityID').empty().append('<option value="0">Select City</option>');
+                        $.each(result, function (index, city) {
+                            $('#CityID').append('<option value="' + city.cityID + '">' + city.cityName + '</option>');
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+
+
+    $('#SearchButton').click(function () {
+        var mainCategoryId = $('#MainCategory').val();
+        var categoryId = $('#Category').val();
+        var countryId = $('#Country').val();
+        var stateId = $('#State').val();
+        var cityId = $('#City').val();
+
+        $.post('/Product/Search', {
+            MainCategoryID: mainCategoryId,
+            CategoryID: categoryId,
+            CountryID: countryId,
+            StateID: stateId,
+            CityID: cityId
+        }, function (data) {
+            $('#ProductList').html(data);
+        });
+    });
+</script>

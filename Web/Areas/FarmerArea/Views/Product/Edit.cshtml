@@ -1,0 +1,137 @@
+﻿@model ProductAndProductDiscountVM
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Edit form</h4>
+
+        <form class="forms-sample" method="post" asp-action="Edit" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ProductID" />
+            <div class="text-danger" asp-validation-summary="ModelOnly">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputUsername1">Product Name</label>
+                <input class="form-control" asp-for="ProductName" id="exampleInputProductName" placeholder="ProductName" fdprocessedid="glgnm">
+                <span asp-validation-for="ProductName"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername1">Product Desc</label>
+                <textarea class="form-control" asp-for="ProductDesc" id="exampleInputProductDesc" placeholder="ProductDesc" fdprocessedid="glgnm"></textarea>
+                <span asp-validation-for="ProductDesc"></span>
+            </div>
+
+            @*   <div class="form-group">
+            <label for="exampleInputUsername1">Main Category Name</label>
+            <select class="form-control"  asp-items="ViewBag.MainCategories" id="maincategory" placeholder="maincategory" fdprocessedid="glgnm">
+            <option>Select Main Category</option>
+            </select>
+            </div> *@
+            <div class="form-group">
+                <label for="exampleInputUsername1">Category Name</label>
+                <select class="form-control" asp-for="CategoryID" asp-items="ViewBag.Categories" id="category" placeholder="category" fdprocessedid="glgnm">
+                    <option>Select Category</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputUsername1">Unit Name</label>
+                <select class="form-control" asp-for="UnitID" asp-items="ViewBag.Units" id="unit" placeholder="Unit" fdprocessedid="glgnm">
+                    <option>Select Unit</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputUsername1">Stock Qty</label>
+                <input class="form-control" asp-for="Qty" id="exampleInputQty" placeholder="Qty" fdprocessedid="glgnm">
+                <span asp-validation-for="Qty"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputUsername1">Price</label>
+                <input class="form-control" asp-for="Price" id="exampleInputPrice" placeholder="Price" fdprocessedid="glgnm">
+                <span asp-validation-for="Price"></span>
+            </div>
+            <div class="col-12">
+                <label for="inputNanme4" class="form-label">Current Photo</label>
+                <img src="@Model.MainPhotoPath" width="80" height="80" />
+                <input type="hidden" class="form-control" asp-for="MainPhotoPath" />
+
+            </div>
+
+
+                <div class="form-group">
+                <label for="exampleInputUsername1">Photo</label>
+                <input type="file" class="form-control" asp-for="PhotoFile" id="exampleInputPhoto" placeholder="Photo" fdprocessedid="glgnm">
+                <span asp-validation-for="PhotoFile"></span>
+            </div>
+            <div class="form-group">
+            <label for="exampleInputUsername1">TraderFarmer Name</label>
+            <select class="form-control" asp-for="TraderFarmerID" asp-items="ViewBag.TraderFarmers" id="TraderFarmer" placeholder="TraderFarmer" fdprocessedid="glgnm">
+                <option>Select TraderFarmer</option>
+            </select>
+            </div>
+
+
+            <div class="form-group">
+                <input type="checkbox" id="addDiscount" name="addDiscount" />
+                <label for="addDiscount">Add Discount</label>
+            </div>
+
+
+
+            @await Component.InvokeAsync("CheckBoxListVC", Model)
+
+
+
+
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a class="btn btn-info" asp-action="Index"> Back </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+    document.getElementById('addDiscount').addEventListener('change', function () {
+        var discountSection = document.getElementById('discountSection');
+        if (this.checked) {
+            discountSection.style.display = 'block';
+        } else {
+            discountSection.style.display = 'none';
+        }
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#maincategory").change(function () {
+
+            $.ajax({
+                url: "/FarmerArea/Product/GetCategories/?MainCategoryID=" + $(this).val(),
+                type: "Get",
+                contentType: "application/json",
+                success: function (result) {
+                    // alert(JSON.stringify(result));
+                    $("#CategoryID").empty();
+                    $.each(result, function (ind, item) {
+                        // alert(ind);
+                        //alert(JSON.stringify(item));
+                        var opt = "<option value=" + item.categoryID + ">" + item.categoryName + "</option>";
+                        $("#CategoryID").append(opt);
+                    });
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+        });
+    });
+</script>
+

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<CartProductDiscountVM>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-4 text-center text-info">Cart for @Context.Session.GetString("UserName")</h2>
+
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-danger text-center" role="alert">
+                    @TempData["Message"]
+                </div>
+            }
+
+            @{
+                decimal subtotal = 0;
+            }
+
+            @foreach (var temp in Model)
+            {
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-3">
+                                <img src="@temp.MainPhotoPath" class="img-fluid rounded" style="height: 150px; object-fit: cover;" alt="Product Image">
+                            </div>
+
+                            <div class="col-md-6">
+                                <h5 class="card-title">@temp.ProductDesc</h5>
+                                <p><strong>Price:</strong> ₹@temp.Price</p>
+                                <p><strong>Discount:</strong> ₹@temp.DiscountAmount</p>
+                                <input type="hidden" value="@temp.DiscountName" />
+                                <input type="hidden" value="@temp.IsPercentile" />
+                                <div>
+                                    <span class="h5">Quantity: @temp.Qty</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 text-center">
+                                @{
+                                    decimal Amount = temp.Price - temp.DiscountAmount;
+                                    decimal total = temp.Qty * Amount;
+                                    subtotal += total;
+                                }
+                                <h5 class="text-success">₹@total</h5>
+                                <a asp-action="DeleteFromCart" asp-controller="Cart" asp-route-cartid="@temp.CartID" class="btn btn-danger btn-sm mt-3">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+                        <div class="card-body">
+                            <h5 class="font-weight-bold text-dark">Subtotal:</h5>
+                            <h3 class="text-danger font-weight-bold">
+                                ₹ @subtotal
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <form asp-action="MakePayment" asp-controller="Cart">
+                        <div class="form-group mb-3">
+                            <label for="paymentMode">Payment Mode:</label>
+                            <select class="form-control" id="paymentMode" name="pmode" asp-items="@Html.GetEnumSelectList<PaymentModeEnum>()">
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-lg">Make Payment</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

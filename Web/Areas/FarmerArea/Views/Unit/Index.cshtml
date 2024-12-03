@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Unit>
+<div class="card">
+    <div class="card-header">
+        <h2> Unit List</h2>
+    </div>
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <a asp-action="Create" class="btn btn-info"> Create New</a>
+                <h4 class="card-title">Table with Unit List</h4>
+
+                <div class="table-responsive pt-3">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Unit Name</th>
+                                <th scope="col"> Qty Per Unit </th>
+                                <th scope="col">Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int srno = 1;
+                            }
+                            @foreach (var temp in Model)
+                            {
+                                <tr class="table-info">
+                                    <th scope="row">@srno</th>
+                                    <td>@temp.UnitName</td>
+                                    <td>@temp.QtyPerUnit</td>
+                                    <td>
+                                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@temp.UnitID"> Edit </a>
+                                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@temp.UnitID"> Delete </a>
+                                    </td>
+                                </tr>
+                                srno++;
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,142 @@
+﻿@model IEnumerable<Product>
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="mx-auto text-center mb-5" style="max-width: 500px;">
+            <h6 class="text-primary text-uppercase">Products</h6>
+            <h1 class="display-5">Our Fresh &amp; Organic Products</h1>
+            <div class="sidebar-categories">
+                <div class="head">Browse Categories</div>
+                @await Component.InvokeAsync("CategorySideBarVC")
+            </div>
+        </div>
+        <div class="owl-carousel product-carousel px-5 owl-loaded owl-drag">
+
+            <div class="owl-stage-outer">
+                <div class="owl-stage" style="transform: translate3d(-967px, 0px, 0px); transition: 1s; width: 3548px;">
+                    <div class="owl-item cloned" style="width: 277.5px; margin-right: 45px;">
+                        <div class="pb-5">
+                            <div class="product-item position-relative bg-white d-flex flex-column text-center">
+                                <img class="img-fluid mb-4" src="~/frontend/img/product-1.png" alt="">
+                                <h6 class="mb-3">Organic Vegetable</h6>
+                                <h5 class="text-primary mb-0">$19.00</h5>
+                                <div class="btn-action d-flex justify-content-center">
+                                    <a class="btn bg-primary py-2 px-3" href=""><i class="bi bi-cart text-white"></i></a>
+                                    <a class="btn bg-secondary py-2 px-3" href=""><i class="bi bi-eye text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    </div><div class="owl-item" style="width: 277.5px; margin-right: 45px;">
+                        <div class="pb-5">
+                            <div class="product-item position-relative bg-white d-flex flex-column text-center">
+                                <img class="img-fluid mb-4" src="~/frontend/img/product-2.png" alt="">
+                                <h6 class="mb-3">Organic Vegetable</h6>
+                                <h5 class="text-primary mb-0">$19.00</h5>
+                                <div class="btn-action d-flex justify-content-center">
+                                    <a class="btn bg-primary py-2 px-3" href=""><i class="bi bi-cart text-white"></i></a>
+                                    <a class="btn bg-secondary py-2 px-3" href=""><i class="bi bi-eye text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="owl-item" style="width: 277.5px; margin-right: 45px;">
+                        <div class="pb-5">
+                            <div class="product-item position-relative bg-white d-flex flex-column text-center">
+                                <img class="img-fluid mb-4" src="~/frontend/img/product-1.png" alt="">
+                                <h6 class="mb-3">Organic Vegetable</h6>
+                                <h5 class="text-primary mb-0">$19.00</h5>
+                                <div class="btn-action d-flex justify-content-center">
+                                    <a class="btn bg-primary py-2 px-3" href=""><i class="bi bi-cart text-white"></i></a>
+                                    <a class="btn bg-secondary py-2 px-3" href=""><i class="bi bi-eye text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="owl-item cloned" style="width: 277.5px; margin-right: 45px;">
+                        <div class="pb-5">
+                            <div class="product-item position-relative bg-white d-flex flex-column text-center">
+                                <img class="img-fluid mb-4" src="~/frontend/img/product-1.png" alt="">
+                                <h6 class="mb-3">Organic Vegetable</h6>
+                                <h5 class="text-primary mb-0">$19.00</h5>
+                                <div class="btn-action d-flex justify-content-center">
+                                    <a class="btn bg-primary py-2 px-3" href=""><i class="bi bi-cart text-white"></i></a>
+                                    <a class="btn bg-secondary py-2 px-3" href=""><i class="bi bi-eye text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="owl-item cloned" style="width: 277.5px; margin-right: 45px;">
+                        <div class="pb-5">
+                            <div class="product-item position-relative bg-white d-flex flex-column text-center">
+                                <img class="img-fluid mb-4" src="~/frontend/img/product-2.png" alt="">
+                                <h6 class="mb-3">Organic Vegetable</h6>
+                                <h5 class="text-primary mb-0">$19.00</h5>
+                                <div class="btn-action d-flex justify-content-center">
+                                    <a class="btn bg-primary py-2 px-3" href=""><i class="bi bi-cart text-white"></i></a>
+                                    <a class="btn bg-secondary py-2 px-3" href=""><i class="bi bi-eye text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="owl-item cloned" style="width: 277.5px; margin-right: 45px;">
+                        <div class="pb-5">
+                            <div class="product-item position-relative bg-white d-flex flex-column text-center">
+                                <img class="img-fluid mb-4" src="~/frontend/    img/product-1.png" alt="">
+                                <h6 class="mb-3">Organic Vegetable</h6>
+                                <h5 class="text-primary mb-0">$19.00</h5>
+                                <div class="btn-action d-flex justify-content-center">
+                                    <a class="btn bg-primary py-2 px-3" href=""><i class="bi bi-cart text-white"></i></a>
+                                    <a class="btn bg-secondary py-2 px-3" href=""><i class="bi bi-eye text-white"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="owl-nav"><div class="owl-prev"><i class="bi bi-arrow-left"></i></div><div class="owl-next"><i class="bi bi-arrow-right"></i></div></div><div class="owl-dots disabled"></div>
+        </div>
+    </div>
+</div>
+<!-- Start Best Seller -->
+<section class="lattest-product-area pb-40 category-list">
+    <div class="alert-info">
+        @TempData["Message"]
+    </div>
+    <div class="row">
+        <!-- single product -->
+        @foreach (var temp in Model)
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="single-product well">
+                    <img src="@temp.MainPhotoPath" width="120" height="100" alt="">
+                    <div class="product-details">
+                        <h5>
+                            @temp.ProductName
+                        </h5>
+                        <h6>
+                            @temp.ProductDesc
+                        </h6>
+                        <div class="price">
+                            <h6>@temp.Price</h6>
+                        </div>
+
+                        <div class="prd-bottom">
+
+                            <a asp-action="AddToCart" asp-controller="Cart" asp-route-productid="@temp.ProductID" asp-route-catid="@temp.CategoryID" class="social-info">
+                                <span class="ti-bag"></span>
+                                <p class="hover-text">add to bag</p>
+                            </a>
+                            <a asp-action="AddToWishList" asp-controller="WishList" asp-route-pid="@temp.ProductID" asp-route-catid="@temp.CategoryID" class="social-info">
+                                <span class="lnr lnr-heart"></span>
+                                <p class="hover-text">Wishlist</p>
+                            </a>
+                            <a asp-action="GetReviews" asp-controller="Home" asp-route-id="@temp.ProductID" class="social-info">
+                                <span class="lnr lnr-move"></span>
+                                <p class="hover-text">Reviews</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- single product -->
+
+    </div>
+</section>
+<!-- End Best Seller -->
+<!-- Start Filter Bar -->

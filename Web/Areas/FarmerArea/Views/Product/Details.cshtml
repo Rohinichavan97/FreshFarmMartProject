@@ -1,0 +1,116 @@
+﻿@model ProductAndProductDiscountVM
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card shadow">
+                <div class="card-header text-center bg-danger text-white">
+                 <h3>Product Details</h3>
+                    
+                </div>
+                <div class="card-body">
+                  
+                    <div class="mb-3">
+                        <h6 class="text-muted"><i class="fa fa-life-ring"></i> Product Name</h6>
+                       <dl>
+                            <dd>
+                                @Html.DisplayFor(model => model.ProductName)
+                            </dd>
+                       </dl>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-muted"><i class="fa fa-life-ring"></i> Product Description</h6>
+                        <dl>
+                            <dd>
+                                @Html.DisplayFor(model => model.ProductDesc)
+                            </dd>
+                        </dl>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="text-muted"><i class="fa fa-life-ring"></i> Catergory Name</h6>
+                        
+                        <dl>
+                            <dd>
+                                @Html.DisplayFor(model => model.Category.CategoryName)
+                            </dd>
+                        </dl>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="text-muted"><i class="fa fa-life-ring"></i>Unit Name</h6>
+                        
+                        <dl>
+                            <dd>
+                                @Html.DisplayFor(model => model.Unit.UnitName)
+                            </dd>
+                        </dl>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="text-muted"><i class="fa fa-life-ring"></i> Stock Qty</h6>
+                        
+                        <dl>
+                            <dd>
+                                @Html.DisplayFor(model => model.Qty)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-muted"><i class="fa fa-life-ring"></i> Price</h6>
+                        
+                        <dl>
+                            <dd>
+                                @Html.DisplayFor(model => model.Price)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-muted"><i class="fa fa-life-ring"></i> Photo</h6>
+                        <img src="@(Model.MainPhotoPath)" width="120" height="100" alt="">
+                        <input type="hidden" class="form-control" asp-for="PhotoFile" />
+                        <dl>
+                            <dd>
+                                @Html.DisplayFor(model => model.MainPhotoPath)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-muted"><i class="fa fa-life-ring"></i>TraderFarmer Name</h6>
+
+                        <dl>
+                            <dd>
+                                @Html.DisplayFor(model => model.TradeName)
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="mb-3">
+                        <h6 class="text-muted"><i class="fa fa-life-ring"></i> Discount Details</h6>
+
+                        <dl>
+                            <dt>Discount Name</dt>
+                            <dd>@Html.DisplayFor(model => model.DiscountName)</dd>
+
+                            <dt>Discount Amount</dt>
+                            <dd>@Html.DisplayFor(model => model.DiscountAmount)</dd>
+
+                           @*  <dt>Is Percentile</dt>
+                            <dd>@Html.DisplayFor(model => model.IsPercentile)</dd> *@
+                            @await Component.InvokeAsync("CheckBoxListVC", Model)
+                        </dl>
+                    </div>
+                    <div class="text-center">
+                        <a asp-action="Index" asp-controller="Product" class="btn btn-secondary">
+                            <i class="fa fa-arrow-left"></i> Back to Product List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,59 @@
+﻿@model Product
+<div class="row s_product_inner">
+	<div class="col-lg-6">
+		<div class="s_Product_carousel owl-carousel owl-theme owl-loaded">
+
+			<div class="owl-stage-outer">
+				<div class="owl-stage" style="transform: translate3d(-1080px, 0px, 0px); transition: all; width: 3780px;">
+					<div class="owl-item cloned" style="width: 300px; margin-right: 0px;">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="@Model.MainPhotoPath" alt="">
+						</div>
+					</div><div class="owl-item cloned" style="width: 300px; margin-right: 0px;">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="@Model.MainPhotoPath" alt="">
+						</div>
+					</div><div class="owl-item active" style="width: 300px; margin-right: 0px;">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="@Model.MainPhotoPath" alt="">
+						</div>
+					</div><div class="owl-item" style="width: 300px; margin-right: 0px;">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="@Model.MainPhotoPath" alt="">
+						</div>
+					</div><div class="owl-item" style="width: 300px; margin-right: 0px;">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="@Model.MainPhotoPath" alt="">
+						</div>
+					</div><div class="owl-item cloned" style="width: 300px; margin-right: 0px;">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="@Model.MainPhotoPath" alt="">
+						</div>
+					</div><div class="owl-item cloned" style="width: 300px; margin-right: 0px;">
+						<div class="single-prd-item">
+							<img class="img-fluid" src="@Model.MainPhotoPath" alt="">
+						</div>
+					</div>
+				</div>
+			</div><div class="owl-controls"><div class="owl-nav"><div class="owl-prev" style="display: none;">prev</div><div class="owl-next" style="display: none;">next</div></div><div class="owl-dots" style=""><div class="owl-dot active"><span></span></div><div class="owl-dot"><span></span></div><div class="owl-dot"><span></span></div></div></div>
+		</div>
+	</div>
+	<div class="col-lg-5 offset-lg-1">
+		<div class="s_product_text">
+			<h3>@Model.ProductName</h3>
+			<h2>@Model.Price</h2>
+			<ul class="list">
+				<li><a class="active" href="#"><span>Category</span>: @Model.Category.CategoryName</a></li>
+
+			</ul>
+			<p>
+				@Model.ProductDesc
+			</p>
+
+			<div class="card_area d-flex align-items-center">
+				<a class="primary-btn" asp-action="AddToCart" asp-controller="Cart" asp-route-productid="@Model.ProductID" asp-route-productid="@Model.CategoryID">Add to Cart</a>
+
+			</div>
+		</div>
+	</div>
+</div>

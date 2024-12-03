@@ -1,0 +1,55 @@
+﻿@model ProductReview
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2> Add Review for Product</h2>
+            <table>
+                <tr>
+                    <td> Product Name: </td>
+                    <td>@ViewBag.ProductName </td>
+                </tr>
+                <tr>
+                    <td> Desc </td>
+                    <td> @ViewBag.ProductDesc </td>
+                </tr>
+                <tr>
+                    <td> Price </td>
+                    <td> @ViewBag.Price </td>
+                </tr>
+                <tr>
+                    <td> Product Photo </td>
+                    <td>
+                        <img src="@ViewBag.MainPhotoPath" width="50" height="50" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="AddReview" asp-controller="UserOrder" method="post">
+                <input type="hidden" asp-for="ProductID" value="@ViewBag.ProductID" />
+                <div>
+                    <label> Reivew Desc :</label>
+                    <div>
+                        <textarea class="form-control" asp-for="ReviewDesc"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <label> Rating </label>
+                    <div>
+                        <select class="form-select" asp-for="Rating" asp-items="@Html.GetEnumSelectList<RatingEnum>()">
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" value="Submit" class="btn btn-success" />
+                    &nbsp;
+                    <a asp-action="Index" class="btn btn-danger"> Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<MainCategory>
+
+<ul class="main-categories">
+	<li class="main-nav-list child"><a asp-action="GetProducts" asp-controller="Home"> All <span class="number"></span></a></li>
+	@foreach (var temp in Model)
+	{
+		<li class="main-nav-list">
+			<a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable">
+				<span class="lnr lnr-arrow-right"></span>@temp.MainCategoryName<span class="number"></span>
+			</a>
+			<ul class="collapse" id="fruitsVegetable" data-toggle="collapse" aria-expanded="false" aria-controls="fruitsVegetable">
+				@foreach (var temp1 in temp.Categories)
+				{
+					<li class="main-nav-list child"><a asp-action="GetProducts" asp-controller="Home" asp-route-CategoryID="@temp1.CategoryID">@temp1.CategoryName<span class="number"></span></a></li>
+				}
+			</ul>
+		</li>
+	}
+
+</ul>

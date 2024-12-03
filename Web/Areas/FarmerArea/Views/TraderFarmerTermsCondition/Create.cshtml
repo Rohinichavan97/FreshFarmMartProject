@@ -1,0 +1,30 @@
+﻿@model TraderFarmerTermsCondition
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Create form</h4>
+
+        <form class="forms-sample" method="post" asp-action="Create">
+            <div class="text-danger" asp-validation-summary="ModelOnly">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername1">Terms Condition Title</label>
+                <input class="form-control" asp-for="TermsConditionTitle" id="exampleInputTermsConditionTitle" placeholder="TermsConditionTitle" fdprocessedid="glgnm">
+                <span asp-validation-for="TermsConditionTitle"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputUsername1">Terms Condition Desc</label>
+                <input class="form-control" asp-for="TermsConditionDesc" id="exampleInputTermsConditionDesc" placeholder="TermsConditionDesc" fdprocessedid="glgnm">
+                <span asp-validation-for="TermsConditionDesc"></span>
+            </div>
+
+           
+
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a class="btn btn-info" asp-action="Index"> Back </a>
+            </div>
+        </form>
+    </div>
+</div>

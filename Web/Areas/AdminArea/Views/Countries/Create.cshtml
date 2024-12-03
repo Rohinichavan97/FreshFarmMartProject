@@ -1,0 +1,45 @@
+﻿@model Country
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Country form</h4>
+        
+        <form class="forms-sample" method="post" asp-action="Create">
+            <div class="text-danger" asp-validation-summary="ModelOnly">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputUsername1">Country Name</label>
+                <input class="form-control" asp-for="CountryName" id="exampleInputUsername1" placeholder="CountryName" fdprocessedid="glgnm">
+                <span asp-validation-for="CountryName"></span>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a class="btn btn-info" asp-action="Index"> Back </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@* <div class="card">
+    <div class="card-body">
+        <h5 class="card-title">New Country</h5>
+
+        <!-- Vertical Form -->
+        <form class="row g-3" method="post" asp-action="Create">
+            <div class="text-danger" asp-validation-summary="ModelOnly">
+            </div>
+            <div class="col-12">
+                <label for="inputNanme4" class="form-label">Country Name</label>
+                <input class="form-control" asp-for="CountryName">
+                <span asp-validation-for="CountryName"></span>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a class="btn btn-info" asp-action="Index"> Back </a>
+            </div>
+        </form><!-- Vertical Form -->
+
+    </div>
+</div> *@
+

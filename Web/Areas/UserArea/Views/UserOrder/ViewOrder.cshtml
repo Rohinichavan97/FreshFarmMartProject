@@ -1,0 +1,154 @@
+﻿@model UserOrder
+<div class="container mt-4">
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3>Order Summary</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Order ID:</strong> @Model.UserOrderID</p>
+                    <p><strong>Order Date:</strong> @Model.OrderDate</p>
+                </div>
+                <div class="col-md-6">
+                    <p>
+                        <strong>Is Paid:</strong>
+                        @if (Model.IsPaid)
+                        {
+                            <span class="badge bg-success">Yes</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">No</span>
+                        }
+                    </p>
+                    <p><strong>User Name:</strong> @Model.User.FullName</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mt-4">
+        <div class="card-header bg-secondary">
+            <h3>Order Details</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Product Name</th>
+                        <th>Photo</th>
+                        <th>Price</th>
+                        <th>Discount</th>
+                        <th>Quantity</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int srno = 1;
+                        decimal? amount = 0, total = 0, grandtotal = 0;
+                    }
+                    @foreach (var temp in Model.UserOrderDets)
+                    {
+                        <tr>
+                            <td>@srno</td>
+                            <td>@temp.Product.ProductName</td>
+                            <td>
+                                <img src="@temp.Product.MainPhotoPath" width="50" height="50" alt="" class="rounded">
+                            </td>
+                            <td>@temp.Price</td>
+                            <td>@temp.Product.ProductDiscounts.FirstOrDefault().DiscountAmount</td>
+                            <td>@temp.Qty</td>
+                            <td>
+                                @{
+                                    amount = temp.Price - @temp.Product.ProductDiscounts.FirstOrDefault().DiscountAmount;
+                                    total = temp.Qty * amount;
+                                    grandtotal += total;
+                                }
+                                <strong>@total</strong>
+                            </td>
+                        </tr>
+                        srno++;
+                    }
+                    <tr class="table-info">
+                        <td colspan="5" class="text-end"><strong>Subtotal:</strong></td>
+                        <td colspan="2"><strong>@grandtotal</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@if (Model.IsPaid)
+{
+    <div class="container mt-4">
+        <div class="card shadow-sm" style="border-radius: 12px;">
+            <div class="card-header text-center" style="background-color: #2E86C1; color: white; font-weight: bold;">
+                <h4>Payment Details</h4>
+            </div>
+            <div class="card-body p-4" style="background-color: #f9f9f9;">
+                <table class="table table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600; color: #34495E; width: 40%;">Payment Date:</td>
+                            <td style="color: #2E86C1;">@Model.UserOrderPayments.FirstOrDefault().PaymentDate</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #34495E;">Payment Mode:</td>
+                            <td style="color: #2E86C1;">@Model.UserOrderPayments.FirstOrDefault().PaymentMode</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #34495E;">Amount:</td>
+                            <td style="color: #2E86C1;">@Model.UserOrderPayments.FirstOrDefault().Amount</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+}
+@if (Model.OrderDispatches.Any())
+{
+    <div class="container mt-4">
+        <div class="card shadow-sm" style="border-radius: 12px;">
+            <div class="card-header text-center" style="background-color: #2E86C1; color: white; font-weight: bold;">
+                <h4>Dispatch Details</h4>
+            </div>
+            <div class="card-body p-4" style="background-color: #f9f9f9;">
+                <table class="table table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600; color: #34495E; width: 40%;">Dispatch Date:</td>
+                            <td style="color: #2E86C1;">@Model.OrderDispatches.FirstOrDefault().DispatchDate</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #34495E;">Expected Reach Date:</td>
+                            <td style="color: #2E86C1;">@Model.OrderDispatches.FirstOrDefault().ExpectedReachDate</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #34495E;">Docket No:</td>
+                            <td style="color: #2E86C1;">@Model.OrderDispatches.FirstOrDefault().DocketNo</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #34495E;">Agency Name:</td>
+                            <td style="color: #2E86C1;">@Model.OrderDispatches.FirstOrDefault().DispatchAgency.AgencyName</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #34495E;">Contact Person Name:</td>
+                            <td style="color: #2E86C1;">@Model.OrderDispatches.FirstOrDefault().DispatchAgency.ContactPerson</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+}
+
+<a class="btn btn-success" asp-action="Index" asp-controller="Home" asp-area=""> Back to Order</a>

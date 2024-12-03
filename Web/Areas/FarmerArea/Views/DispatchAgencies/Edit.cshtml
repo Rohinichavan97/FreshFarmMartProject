@@ -1,0 +1,48 @@
+﻿@model DispatchAgency
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Edit Agency</h5>
+
+        <!-- Vertical Form -->
+        <form class="row g-3" method="post" asp-action="Edit">
+            <div class="text-danger" asp-validation-summary="ModelOnly">
+            </div>
+            <input type="hidden" asp-for="DispatchAgencyID" />
+            <div class="col-12">
+                <label for="inputNanme4" class="form-label">Dispatch Agency Name</label>
+                <input class="form-control" asp-for="AgencyName">
+                <span asp-validation-for="AgencyName"></span>
+            </div>
+            <div class="col-12">
+                <label for="inputNanme4" class="form-label">Address</label>
+                <textarea class="form-control" asp-for="Address"></textarea>
+                <span asp-validation-for="Address"></span>
+            </div>
+            <div class="col-12">
+                <label for="inputNanme4" class="form-label">Email ID</label>
+                <input class="form-control" asp-for="EmailID">
+                <span asp-validation-for="EmailID"></span>
+            </div>
+
+            <div class="col-12">
+                <label for="inputNanme4" class="form-label">Mobile No</label>
+                <input class="form-control" asp-for="MobileNo">
+                <span asp-validation-for="MobileNo"></span>
+            </div>
+
+            <div class="col-12">
+                <label for="inputNanme4" class="form-label">Contact Person Name</label>
+                <input class="form-control" asp-for="ContactPerson">
+                <span asp-validation-for="ContactPerson"></span>
+            </div>
+
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                <a class="btn btn-info" asp-action="Index"> Back </a>
+            </div>
+        </form><!-- Vertical Form -->
+
+    </div>
+</div>

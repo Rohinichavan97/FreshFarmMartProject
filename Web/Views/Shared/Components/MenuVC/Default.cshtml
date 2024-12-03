@@ -1,0 +1,18 @@
+﻿@* @model IEnumerable<Infra.ViewModels.SearchProductVM>
+
+@foreach (var temp in Model)
+{
+    <li class="nav-item submenu dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            @temp.MainCategoryName
+        </a>
+        <ul class="dropdown-menu">
+            @foreach (var temp1 in temp.Categories)
+            {
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="GetProducts" asp-controller="Home" asp-route-CatID="@temp1.CategoryID">@temp1.CategoryName</a>
+                </li>
+            }
+        </ul>
+    </li>
+} *@

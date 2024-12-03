@@ -1,0 +1,111 @@
+﻿@model Product
+<div class="container mt-5">
+<p>
+    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+       Product Details
+    </a>
+</p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <h3 class="card-text">@Model.ProductName</h3>
+            <img src="@Url.Content(Model.MainPhotoPath)" alt="@Model.ProductName" class="img-fluid mb-3" width="200px" />
+            <p class="card-text">@Model.ProductDesc</p>
+            <p><strong>Price:</strong> @Model.Price</p>
+            <p><strong>Quantity:</strong> @Model.Qty</p>
+        </div>
+    </div>
+
+
+
+
+
+        <p>
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Trader/Farmer Information
+            </a>
+        </p>
+    <div class="collapse" id="collapseExample">
+          
+        <div class="card card-body">
+            <p><strong>Trader/Farmer Name:</strong> @Model.TraderFarmer.TradeName</p>
+            <p><strong>Address:</strong> @Model.TraderFarmer.Address, @Model.TraderFarmer.PinCode</p>
+            <p><strong>Contact Person:</strong> @Model.TraderFarmer.ContactPerson</p>
+            <p><strong>Registration Date:</strong> @Model.TraderFarmer.RegistrationDate.ToShortDateString()</p>
+            <p><strong>Active:</strong> @(Model.TraderFarmer.ActiveFlag ? "Yes" : "No")</p>
+            <p><strong>Email:</strong> @Model.TraderFarmer.EmailID</p>
+            <p><strong>Mobile No:</strong> @Model.TraderFarmer.MobileNo</p>
+        </div>
+    </div>
+
+
+
+    <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Additional Photos
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <div class="row">
+                @foreach (var photo in Model.ProductPhotos)
+                {
+                    <div class="col-md-3 mb-3">
+                        <img src="@Url.Content(photo.PhotoPath)" alt="Product Photo" class="img-fluid" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+    <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Discounts
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <ul class="list-group list-group-flush">
+                @foreach (var discount in Model.ProductDiscounts)
+                {
+                    <li class="list-group-item">@discount.DiscountName: @discount.DiscountAmount @(discount.IsPercentile ? "%" : "")</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+
+    <p>
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Reviews
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+ 
+        <div class="card-body">
+            @foreach (var review in Model.ProductReviews)
+            {
+                <div class="card mb-3">
+                    <div class="review mb-3">
+                        <p class="card-header text-dark fw-bold">@review.User.FullName</p>
+                       <div class="card-body">
+                            <p>@review.ReviewDesc</p>
+                            <p><strong>Rating:</strong> @review.Rating</p>
+                       </div>
+                    </div>
+                </div>
+            }
+        
+            <a asp-action="AddReview" asp-controller="UserOrder" asp-area="UserArea" asp-route-id="@Model.ProductID" class="btn btn-secondary">AddReview </a>
+            <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">Back </a>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+        <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">
+            <i class="fa fa-arrow-left"></i> Back to Product List
+        </a>
+    </div>
+</div>
+
